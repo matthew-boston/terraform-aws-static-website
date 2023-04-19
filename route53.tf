@@ -3,11 +3,12 @@
 # --------------------------------------------------------------------------
 
 data "aws_route53_zone" "main" {
+  provider = aws.dns_zones
   name = var.domain_name
 }
 
 resource "aws_route53_record" "main" {
-  zone_id = aws_route53_zone.main.zone_id
+  zone_id = data.aws_route53_zone.main.zone_id
   name    = var.domain_name
   type    = "A"
 
@@ -19,7 +20,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.main.zone_id
+  zone_id = data.aws_route53_zone.main.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
 
