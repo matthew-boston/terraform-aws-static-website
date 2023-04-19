@@ -16,7 +16,7 @@ provider "aws" {
 # --------------------------------------------------------------------------
 terraform {
   backend "s3" {
-    bucket     = "personal-website-terraform-state"
+    bucket     = "static-website-terraform-state"
     key        = "terraform.tfstate"
     region     = "eu-west-2"
   }
