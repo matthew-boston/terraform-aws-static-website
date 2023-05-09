@@ -2,32 +2,33 @@
 # Static website hosted on S3
 # --------------------------------------------------------------------------
 resource "aws_s3_bucket" "website" {
-    bucket = var.static_website_bucket_name
-    force_destroy = true
+  bucket        = var.static_website_bucket_name
+  force_destroy = true
 
-    tag = {
-        Name = var.tag_name
-    }
-
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
+  tags = {
+    Name = var.tag_name
   }
 }
 
+resource "aws_s3_bucket_acl" "bucket-acl" {
+  bucket = aws_s3_bucket.website.id
+  acl    = "public-read"
+}
 
 resource "aws_s3_bucket_website_configuration" "s3_website_config" {
-    bucket = aws_s3_bucket.website.id
-
-    index_document = "index.html"
-    error_document = "index.html"
-  
+  bucket = aws_s3_bucket.website.id
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "index.html"
+  }
 }
 
 resource "aws_s3_bucket_policy" "s3_website_policy" {
-    bucket = aws_s3_bucket.website.id
+  bucket = aws_s3_bucket.website.id
 
-    policy = <<POLICY
+  policy = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -42,3 +43,6 @@ resource "aws_s3_bucket_policy" "s3_website_policy" {
 }
 POLICY
 }
+
+
+
