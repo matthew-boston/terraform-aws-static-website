@@ -1,5 +1,5 @@
 module "static_website" {
-  source = "https://github.com/matthew-boston/terraform-static-website/module"
+  source = "./module"
   static_website_bucket_name = "my-static-website-bucket"
   tag_name = "my-tag"
   domain_name = "my-domain.com"
