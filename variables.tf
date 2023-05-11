@@ -15,13 +15,3 @@ variable "tag_name" {
     type        = string
    
  }
-
-variable "access_key" {
-    description = "The AWS access key"
-    type        = string
-}
-
-variable "secret_access_key" {
-    description = "The AWS secret access key"
-    type        = string
-}

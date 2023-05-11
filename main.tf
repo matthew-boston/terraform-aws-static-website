@@ -107,7 +107,7 @@ resource "aws_cloudfront_distribution" "main" {
   comment             = "CloudFront Distribution for ${aws_s3_bucket.website.bucket}"
   default_root_object = "index.html"
 
-aliases = [var.domain_name]
+  aliases = [var.domain_name]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
@@ -127,6 +127,8 @@ aliases = [var.domain_name]
     default_ttl            = 3600
     max_ttl                = 86400
   }
+
+  price_class = "PriceClass_All"
 
   restrictions {
     geo_restriction {

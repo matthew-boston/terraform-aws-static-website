@@ -1,36 +1,41 @@
-# Terraform Static Website
-This is a terraform deployment script that deploys a S3 bucket holding a static website and a CloudFront distribution connected to a domain
+<center>
+<img src="https://camo.githubusercontent.com/1a4ed08978379480a9b1ca95d7f4cc8eb80b45ad47c056a7cfb5c597e9315ae5/68747470733a2f2f7777772e6461746f636d732d6173736574732e636f6d2f323838352f313632393934313234322d6c6f676f2d7465727261666f726d2d6d61696e2e737667
+" width="250"/>
+<h1> Terraform AWS Static Website</h1>
+</center>
 
+<hr/>
+## Introduction
 
-## Prerequisites
-1) You will need to have an AWS account.
-2) You will need to have Terraform Installed and AWS CLI
+This is a Terraform module that deploys infastructure for a static website. Designed to besuper simple for developing wanting to quickly deploy a website.
 
-You will also need to have an S3 bucket created within the AWS account to store the state of the Terraform. Run the following command to do this:
+## What's Created
+- S3 Bucket
+- CloudFront Distribution
+- Route 53 A record
+- ACM certificate
 
-Configure AWS CLI
+## Example
 ```
-aws configure
-```
+provider "aws" {
+  region = "us-east-1"
+}
 
-```
-aws s3 mb s3://<YOUR_STATE_BUCKET_NAME>
-```
-Your state bucket name can be found in the `main.tf`.
-
-## Run program
-1) Fill out all the vairables within the variables.tf
-
-2) Run the following command to initailse the Terraform script.
-```
-terraform init
-```
-3) Run the following command to plan the Terraform script.
-```
-terraform plan
+module "static_website" {
+  source                     = "../"
+  static_website_bucket_name = "example.com"
+  tag_name                   = "tag_name"
+  domain_name                = "example.com"
+}
 ```
 
-4) Run the following command to apply the Terraform code to AWS.
+### CloudFront Information
+CloudFront has been set up with the following:
 ```
-terraform apply
+price_class = PriceClass_All (All Locations)
+viewer_protocol_policy = redirect-to-https
+min_ttl = 0
+default_ttl = 3600
+max_ttl = 86400
 ```
+

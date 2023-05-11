@@ -3,7 +3,7 @@ output "cloudfront_domain_name" {
 }
 
 output "s3_domain_name" {
-  value = aws_s3_bucket.s3_bucket.bucket_domain_name
+  value = aws_s3_bucket.website.bucket_domain_name
 }
 
 output "website_address" {
@@ -11,5 +11,5 @@ output "website_address" {
 }
 
 output "s3_bucket_name" {
-  value = aws_s3_bucket.s3_bucket.id
+  value = aws_s3_bucket.website.id
 }
