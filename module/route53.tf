@@ -3,7 +3,6 @@
 # --------------------------------------------------------------------------
 
 data "aws_route53_zone" "main" {
-  provider = aws.dns_zones
   name = var.domain_name
 }
 

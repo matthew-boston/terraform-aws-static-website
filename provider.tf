@@ -2,13 +2,7 @@
 # Provider
 # --------------------------------------------------------------------------
 provider "aws" {
-  region = "eu-west-2"
-  alias = "dns_zones"
-}
-
-provider "aws" {
   region = "us-east-1"
-  alias = "us-east-1"
 }
 
 # --------------------------------------------------------------------------
@@ -16,8 +10,8 @@ provider "aws" {
 # --------------------------------------------------------------------------
 terraform {
   backend "s3" {
-    bucket     = "static-website-terraform-state"
+    bucket     = "aws-temp-state-bucket-2023"
     key        = "terraform.tfstate"
-    region     = "eu-west-2"
+    region     = "us-east-1"
   }
 }
