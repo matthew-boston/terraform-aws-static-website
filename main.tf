@@ -1,8 +1,10 @@
 module "static_website" {
   source = "./module"
-  static_website_bucket_name = "my-static-website-bucket"
-  tag_name = "my-tag"
-  domain_name = "my-domain.com"
-  access_key = ""
-  secret_access_key = ""
+
+  static_website_bucket_name = var.static_website_bucket_name
+  tag_name                   = var.tag_name
+  domain_name                = var.domain_name
+  access_key                 = var.access_key
+  secret_access_key          = var.secret_access_key
+
 }
