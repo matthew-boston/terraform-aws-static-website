@@ -1,23 +1,8 @@
-# --------------------------------------------------------------------------
-# Provider
-# --------------------------------------------------------------------------
-provider "aws" {
-  region = "eu-west-2"
-  alias = "dns_zones"
-}
-
-provider "aws" {
-  region = "us-east-1"
-  alias = "us-east-1"
-}
-
-# --------------------------------------------------------------------------
-# Backend
-# --------------------------------------------------------------------------
-terraform {
-  backend "s3" {
-    bucket     = "static-website-terraform-state"
-    key        = "terraform.tfstate"
-    region     = "eu-west-2"
-  }
+module "static_website" {
+  source = "https://github.com/matthew-boston/terraform-static-website/module"
+  static_website_bucket_name = "my-static-website-bucket"
+  tag_name = "my-tag"
+  domain_name = "my-domain.com"
+  access_key = ""
+  secret_access_key = ""
 }
