@@ -1,6 +1,7 @@
 # Terraform AWS Static Website
 
 <hr/>
+
 ## Introduction
 
 This is a Terraform module that deploys infastructure for a static website. Designed to besuper simple for developing wanting to quickly deploy a website.
