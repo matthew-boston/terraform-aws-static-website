@@ -15,3 +15,9 @@ variable "tag_name" {
     type        = string
    
  }
+
+ variable "domain_prefix" {
+    description = "The domain prefix that will be used placed infront of the domain"
+    type        = string
+    default     = "www"
+ }
