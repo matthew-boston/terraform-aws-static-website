@@ -7,13 +7,13 @@ terraform {
     }
   }
 }
-provider "aws"{
+provider "aws" {
   region = var.region
 }
 
 provider "aws" {
-  region = "us-east-1";
-  alais = "certificate";
+  region = "us-east-1"
+  alais  = "certificate"
 }
 
 
@@ -79,7 +79,7 @@ data "aws_iam_policy_document" "s3_policy" {
       "arn:aws:s3:::${aws_s3_bucket.website.id}/*"
     ]
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
         "*"
       ]
@@ -92,7 +92,7 @@ data "aws_iam_policy_document" "s3_policy" {
 # ACM Certificate
 # --------------------------------------------------------------------------
 resource "aws_acm_certificate" "main" {
-  provider= "certificate"
+  provider = aws.certificate
   domain_name       = var.domain_name
   validation_method = "DNS"
 
@@ -119,6 +119,7 @@ resource "aws_route53_record" "validation" {
 }
 
 resource "aws_acm_certificate_validation" "main" {
+  
   certificate_arn         = aws_acm_certificate.main.arn
   validation_record_fqdns = [for rvo in aws_route53_record.validation : rvo.fqdn]
 }

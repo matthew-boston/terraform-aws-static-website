@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a Terraform module that deploys infastructure for a static website. Designed to besuper simple for developing wanting to quickly deploy a website.
+This is a Terraform module that deploys infastructure for a static website. Designed to be super simple for developing wanting to quickly deploy a website.
 
 ## What's Created
 
@@ -15,7 +15,7 @@ This is a Terraform module that deploys infastructure for a static website. Desi
 
 ## Example
 
-```
+```bash
 provider "aws" {
   region = "us-east-1"
 }
@@ -25,7 +25,10 @@ module "static_website" {
   static_website_bucket_name = "example.com"
   tag_name                   = "tag_name"
   domain_name                = "example.com"
+  domain_prefix              = "www"
+  region                     = "us-east-1"
 }
+
 ```
 
 ### CloudFront Information
