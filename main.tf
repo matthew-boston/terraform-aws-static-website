@@ -7,9 +7,13 @@ terraform {
     }
   }
 }
+provider "aws"{
+  region = var.region
+}
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-1";
+  alais = "certificate";
 }
 
 
@@ -88,6 +92,7 @@ data "aws_iam_policy_document" "s3_policy" {
 # ACM Certificate
 # --------------------------------------------------------------------------
 resource "aws_acm_certificate" "main" {
+  provider= "certificate"
   domain_name       = var.domain_name
   validation_method = "DNS"
 
