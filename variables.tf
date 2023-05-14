@@ -21,3 +21,10 @@ variable "tag_name" {
     type        = string
     default     = "www"
  }
+
+
+ variable "region" {
+    description = "When all of your resources will be generated"
+    type        = string
+    default     = "us-east-1"
+ }
