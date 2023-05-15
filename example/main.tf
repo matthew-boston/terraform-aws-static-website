@@ -9,4 +9,6 @@ module "static_website" {
   domain_name                = "example.com"
   domain_prefix              = "www"
   region                     = "us-east-1"
+  restriction_type           = "blacklist"
+  restriction_locations      = ["CN", "RU"]
 }

@@ -27,6 +27,8 @@ module "static_website" {
   domain_name                = "example.com"
   domain_prefix              = "www"
   region                     = "us-east-1"
+  restriction_type           = "blacklist"
+  restriction_locations      = ["CN", "RU"]
 }
 
 ```
@@ -35,7 +37,7 @@ module "static_website" {
 
 CloudFront has been set up with the following:
 
-```
+```bash
 price_class = PriceClass_All (All Locations)
 viewer_protocol_policy = redirect-to-https
 min_ttl = 0

@@ -92,7 +92,7 @@ data "aws_iam_policy_document" "s3_policy" {
 # ACM Certificate
 # --------------------------------------------------------------------------
 resource "aws_acm_certificate" "main" {
-  provider = aws.certificate
+  provider          = aws.certificate
   domain_name       = var.domain_name
   validation_method = "DNS"
 
@@ -119,7 +119,7 @@ resource "aws_route53_record" "validation" {
 }
 
 resource "aws_acm_certificate_validation" "main" {
-  
+
   certificate_arn         = aws_acm_certificate.main.arn
   validation_record_fqdns = [for rvo in aws_route53_record.validation : rvo.fqdn]
 }
@@ -159,12 +159,15 @@ resource "aws_cloudfront_distribution" "main" {
     max_ttl                = 86400
   }
 
-  price_class = "PriceClass_All"
+  price_class = var.price_class
+
 
   restrictions {
     geo_restriction {
-      restriction_type = "none"
+      restriction_type = var.restriction_type
+      locations        = var.restriction_type == "none" ? [] : var.restriction_locations
     }
+
   }
 
   viewer_certificate {
