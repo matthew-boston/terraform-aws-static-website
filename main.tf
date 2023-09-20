@@ -10,7 +10,6 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-  alais  = "certificate"
 }
 
 
@@ -89,7 +88,6 @@ data "aws_iam_policy_document" "s3_policy" {
 # ACM Certificate
 # --------------------------------------------------------------------------
 resource "aws_acm_certificate" "main" {
-  provider          = aws.certificate
   domain_name       = var.domain_name
   validation_method = "DNS"
 
@@ -203,6 +201,31 @@ resource "aws_route53_record" "www" {
   zone_id = data.aws_route53_zone.main.zone_id
   name    = "${prefix}.${var.domain_name}"
   type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.main.domain_name
+    zone_id                = aws_cloudfront_distribution.main.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+
+resource "aws_route53_record" "AAA_main" {
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = var.domain_name
+  type    = "AAA"
+
+  alias {
+    name                   = aws_cloudfront_distribution.main.domain_name
+    zone_id                = aws_cloudfront_distribution.main.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "AAA_www" {
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = "${prefix}.${var.domain_name}"
+  type    = "AAA"
 
   alias {
     name                   = aws_cloudfront_distribution.main.domain_name

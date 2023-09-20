@@ -23,13 +23,6 @@ variable "domain_prefix" {
 }
 
 
-variable "region" {
-  description = "When all of your resources will be generated"
-  type        = string
-  default     = "us-east-1"
-}
-
-
 variable "restriction_type" {
   description = "The type of restriction that will be applied to the CloudFront distribution"
   type        = string
