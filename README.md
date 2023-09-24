@@ -10,15 +10,12 @@ This is a Terraform module that deploys infastructure for a static website. Desi
 
 - S3 Bucket
 - CloudFront Distribution
-- Route 53 A record & AAA Record
+- Route 53 A record & AAAA Record
 - ACM certificate
 
 ## Example
 
 ```bash
-provider "aws" {
-  region = "us-east-1"
-}
 
 module "static-website" {
   source  = "matthew-boston/static-website/aws"
