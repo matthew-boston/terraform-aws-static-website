@@ -210,10 +210,10 @@ resource "aws_route53_record" "www" {
 }
 
 
-resource "aws_route53_record" "AAA_main" {
+resource "aws_route53_record" "AAAA_main" {
   zone_id = data.aws_route53_zone.main.zone_id
   name    = var.domain_name
-  type    = "AAA"
+  type    = "AAAA"
 
   alias {
     name                   = aws_cloudfront_distribution.main.domain_name
@@ -222,10 +222,10 @@ resource "aws_route53_record" "AAA_main" {
   }
 }
 
-resource "aws_route53_record" "AAA_www" {
+resource "aws_route53_record" "AAAA_www" {
   zone_id = data.aws_route53_zone.main.zone_id
   name    = "${var.domain_prefix}.${var.domain_name}"
-  type    = "AAA"
+  type    = "AAAA"
 
   alias {
     name                   = aws_cloudfront_distribution.main.domain_name
