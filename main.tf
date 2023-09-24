@@ -199,7 +199,7 @@ resource "aws_route53_record" "main" {
 
 resource "aws_route53_record" "www" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${prefix}.${var.domain_name}"
+  name    = "${var.domain_prefix}.${var.domain_name}"
   type    = "A"
 
   alias {
@@ -224,7 +224,7 @@ resource "aws_route53_record" "AAA_main" {
 
 resource "aws_route53_record" "AAA_www" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "${prefix}.${var.domain_name}"
+  name    = "${var.domain_prefix}.${var.domain_name}"
   type    = "AAA"
 
   alias {
